@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1ara2m1g0huv"]
+
+[ext_resource type="Script" path="res://object/player.gd" id="1_lpk2i"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mvccn"]
+size = Vector3(4, 4, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x5wtk"]
+size = Vector3(4, 4, 4)
+
+[node name="player" type="Node3D"]
+script = ExtResource("1_lpk2i")
+
+[node name="model" type="Node3D" parent="."]
+
+[node name="mesh_instance_3d" type="MeshInstance3D" parent="model"]
+mesh = SubResource("BoxMesh_mvccn")
+
+[node name="area_3d" type="Area3D" parent="model"]
+
+[node name="collision_shape_3d" type="CollisionShape3D" parent="model/area_3d"]
+shape = SubResource("BoxShape3D_x5wtk")
