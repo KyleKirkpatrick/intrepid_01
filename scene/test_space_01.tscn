@@ -1,7 +1,47 @@
-[gd_scene load_steps=2 format=3 uid="uid://b452t4i3q4lec"]
+[gd_scene load_steps=8 format=3 uid="uid://b452t4i3q4lec"]
 
+[ext_resource type="PackedScene" uid="uid://b0nt4n13a6448" path="res://addons/starlight/Stars.tscn" id="1_6ljtf"]
 [ext_resource type="PackedScene" uid="uid://d1ara2m1g0huv" path="res://object/player.tscn" id="1_nw8g0"]
+[ext_resource type="Script" path="res://addons/starlight/StarGenerator.gd" id="2_aj124"]
+[ext_resource type="Texture2D" uid="uid://behj6df53yarw" path="res://object/texture/noise_space-fog_01.tres" id="4_kntb3"]
+
+[sub_resource type="Environment" id="Environment_4yrxo"]
+background_energy_multiplier = 0.0
+ambient_light_energy = 0.0
+fog_light_color = Color(0.490746, 0.478234, 0.953675, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t0sfw"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(6.73831e-07, 0.340358, 0.405124, 1)
+albedo_texture = ExtResource("4_kntb3")
+proximity_fade_distance = 662.3
+distance_fade_max_distance = 400.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_0c4nt"]
+material = SubResource("StandardMaterial3D_t0sfw")
+size = Vector2(160, 90)
 
 [node name="test_space" type="Node3D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4yrxo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 0, 0, 0)
+shadow_enabled = true
+sky_mode = 1
+
+[node name="Stars" parent="." instance=ExtResource("1_6ljtf")]
+script = ExtResource("2_aj124")
+size = 8000.0
+star_count = 10000
+rng_seed = 8888
+generate_at_origin = false
+shader_params/emission_energy = 5e+08
+
 [node name="player" parent="." instance=ExtResource("1_nw8g0")]
+
+[node name="mesh_instance_3d" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_0c4nt")
