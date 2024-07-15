@@ -1,15 +1,68 @@
-[gd_scene load_steps=2 format=3 uid="uid://bahso4evbnp2v"]
+[gd_scene load_steps=4 format=3 uid="uid://bahso4evbnp2v"]
 
 [ext_resource type="Script" path="res://engine/viewport.gd" id="1_glm6m"]
+[ext_resource type="Script" path="res://engine/heads_up_display.gd" id="2_6jxaf"]
+[ext_resource type="Theme" uid="uid://dyuq28cntedku" path="res://engine/text_theme_01.tres" id="2_jwwdc"]
 
-[node name="viewport" type="Node2D"]
+[node name="viewport" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_glm6m")
 
 [node name="sub_viewport_container" type="SubViewportContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="sub_viewport" type="SubViewport" parent="sub_viewport_container"]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
+
+[node name="heads_up_display" type="Camera2D" parent="."]
+script = ExtResource("2_6jxaf")
+
+[node name="container" type="Control" parent="heads_up_display"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -910.0
+offset_top = -462.0
+offset_right = 910.0
+offset_bottom = 462.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+metadata/_edit_use_anchors_ = true
+
+[node name="coordinate_label" type="RichTextLabel" parent="heads_up_display/container"]
+clip_contents = false
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 100.0
+grow_vertical = 0
+theme = ExtResource("2_jwwdc")
+bbcode_enabled = true
+text = "X: 
+Y:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true

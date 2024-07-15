@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b452t4i3q4lec"]
+[gd_scene load_steps=9 format=3 uid="uid://b452t4i3q4lec"]
 
 [ext_resource type="PackedScene" uid="uid://b0nt4n13a6448" path="res://addons/starlight/Stars.tscn" id="1_6ljtf"]
 [ext_resource type="PackedScene" uid="uid://d1ara2m1g0huv" path="res://object/player.tscn" id="1_nw8g0"]
 [ext_resource type="Script" path="res://addons/starlight/StarGenerator.gd" id="2_aj124"]
+[ext_resource type="Script" path="res://engine/camera_target.gd" id="3_gymi7"]
 [ext_resource type="Texture2D" uid="uid://behj6df53yarw" path="res://object/texture/noise_space-fog_01.tres" id="4_kntb3"]
 
 [sub_resource type="Environment" id="Environment_4yrxo"]
@@ -40,6 +41,12 @@ star_count = 10000
 rng_seed = 8888
 generate_at_origin = false
 shader_params/emission_energy = 5e+08
+
+[node name="camera_target" type="Node3D" parent="."]
+script = ExtResource("3_gymi7")
+
+[node name="camera_3d" type="Camera3D" parent="camera_target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
 
 [node name="player" parent="." instance=ExtResource("1_nw8g0")]
 
