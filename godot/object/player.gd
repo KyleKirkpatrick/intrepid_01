@@ -7,7 +7,7 @@ extends RigidBody3D
 @export var damping_threshold = 0.1  # Threshold for applying damping
 @export var damping_factor = 0.5  # Damping factor
 
-@onready var coordinate_label = $camera_2d/container/coordinate_label
+#@onready var coordinate_label = $camera_2d/container/coordinate_label
 
 #rotational PID controller
 var target_direction = Vector3(0,1,0)
@@ -45,7 +45,7 @@ func rotate_toward_direction(target_direction, delta):
 	pid = i
 	
 	# Calculate torque
-	var torque = -kp * p - ki * i - kd * d
+	var torque = (-kp * p - ki * i - kd * d) * impulse_speed
 	
 	# Check if damping should be applied
 	var angle = current_direction.angle_to(target_direction)

@@ -62,7 +62,7 @@ void vertex() {
 	POSITION = projected + vec4(VERTEX.xy * projected.w * size * one_degree, 0.0, 0.0);
 	// Force Z value to far clip plane so that it will always render behind everything else.
 	// This also prevents it being clipped, which lets stars be seen from much further away than the camera far plane would normally allow.
-	POSITION.z = 1.0 * projected.w;
+	POSITION.z = -1.0 * projected.w;
 }
 
 
